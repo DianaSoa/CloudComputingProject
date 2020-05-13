@@ -1,0 +1,130 @@
+<title></title>
+
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <h1>API Guide</h1><br><br>
+</head>
+
+<body>
+    <div id="apiArea">
+        <label for="Category">Search for APIs, based on the input category: </label>
+        <textarea id="Category" rows="1" cols="50"></textarea><br><br>
+        <input type="button" value="Search Apis" onClick="getApis()"/>
+    </div><br><br>
+    
+    <table id="APITable" border = "1" cellpadding = "5" cellspacing = "5">
+         <tr>
+            <th>API</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Link</th>
+         </tr>
+    </table><br><br><br>
+    
+    <h2>Examples of API calls</h2><br><br>
+    
+    <div id="example1">
+        <h3>Example 1 - Random Cat Pictures</h3><br>
+        <i>Call: </i>GET / https://aws.random.cat/meow<br><br>
+        <input type="button" value="Get Random Cat Picture" onClick="getCat()"><br><br>
+        <i>Result: </i><br>
+    </div>
+    
+    <div id="example2">
+        <h3>Example 2 - lyrics.ovh</h3><br>
+        <i>Call: </i>GET / https://api.lyrics.ovh/v1/[artist]/[song]<br><br>
+        <label for="artist">Write an artist/band: </label>
+        <textarea id="artist" rows=1 cols=50></textarea><br>
+        <label for="song">Write a song: </label>
+        <textarea id="song" rows=1 cols=50></textarea><br>
+        <input type="button" value="Get Lyrics" onClick="getLyrics()"><br><br>
+        <i>Result: </i><br>
+        <div id="LyricsResult"></div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function getApis()
+    {
+        axios.get('https://api.publicapis.org/entries', { params: {
+            category : document.getElementById("Category").value
+        }
+        }).then(function(result){
+            console.log(result)
+            var apis = result.data.entries;
+            
+            var table = document.getElementById("APITable");
+            var rows = table.rows.length;
+            
+            for (var x=rows-1; x>0; x--) {
+                table.deleteRow(x);
+            }
+            
+            for(var i in apis)
+            {
+                var row = document.createElement("tr");
+                var api = document.createElement("td");
+                var categ = document.createElement("td");
+                var desc = document.createElement("td");
+                var link = document.createElement("td");
+                
+                api.textContent = apis[i].API;
+                categ.textContent = apis[i].Category;
+                desc.textContent = apis[i].Description;
+                link.textContent = apis[i].Link;
+                
+                row.appendChild(api);
+                row.appendChild(categ);
+                row.appendChild(desc);
+                row.appendChild(link);
+                
+                document.getElementById("APITable").appendChild(row);
+            }
+        })
+    }
+    
+    function getCat()
+    {
+        axios.get('https://aws.random.cat/meow')
+        .then(function(result){
+            console.log(result);
+            
+            var image = document.createElement('img');
+            image.src = result.data.file;
+            image.height = 250;
+            image.width = 250;
+            document.getElementById("example1").appendChild(image);
+        })
+    }
+    
+    function getLyrics()
+    {
+        var artist = document.getElementById('artist').value;
+        var song = document.getElementById('song').value;
+        
+        if(!artist)
+        {
+            alert('Please write an artist');
+            return;
+        }
+        
+         if(!song)
+        {
+            alert('Please write a song');
+            return;
+        }
+        
+        var lyricsDiv = document.getElementById('LyricsResult');
+        
+        axios.get('https://api.lyrics.ovh/v1/' + artist + '/' + song
+        ).then(function(result){
+            console.log(result);
+            
+            lyricsDiv.textContent = result.data.lyrics;
+            
+        }).catch(function(error){
+            lyricsDiv.textContent = "No lyrics found";
+        })
+        
+    }
+</script>
