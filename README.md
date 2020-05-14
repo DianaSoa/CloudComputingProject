@@ -110,7 +110,25 @@ Response:
 
 ## Capturi
 
-![Alt text](/PaginaPrincipala.PNG?raw=true "Pagina principala")
+### Pagina principala
+
+![Alt text](/CapturiEcranAplicatie/PaginaPrincipala.PNG?raw=true "Pagina principala")
+
+### Exemplu call public_api
+
+![Alt text](/CapturiEcranAplicatie/APIListCall.PNG?raw=true "public_apis")
+
+### Exemplu call Random Cat API
+
+![Alt text](/CapturiEcranAplicatie/MultipleRandomCatAPICalls.PNG?raw=true "Random Cat API")
+
+### Exemplu alerta no input pentru lyrics.ovh API (similar pentru artist si song)
+
+![Alt text](/CapturiEcranAplicatie/ExempluAlerta.PNG?raw=true "Exemplu Alerta")
+
+### Exemplu call lyrics.ovh API
+
+![Alt text](/CapturiEcranAplicatie/LyricsAPICall.PNG?raw=true "Lyrics.ovh API")
 
 ## Referinte
 (1) https://github.com/davemachado/public-api
