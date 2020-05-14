@@ -110,7 +110,7 @@ Response:
 
 ## Capturi
 
-![Alt text](PaginaPrincipala.png?raw=true "Pagina principala")
+![Alt text](/PaginaPrincipala.PNG?raw=true "Pagina principala")
 
 ## Referinte
 (1) https://github.com/davemachado/public-api
